@@ -1,0 +1,162 @@
+@{
+    ViewBag.Title = "Welcome to Foodies";
+}
+
+<!-- Hero Section -->
+<div class="container-fluid p-0">
+    <div class="home-hero wow fadeIn" data-wow-delay="0.1s">
+        <div class="row align-items-center">
+            <div class="col-lg-7 text-center text-lg-start">
+                <span class="hero-subtitle-top wow slideInDown" data-wow-delay="0.2s">Welcome to Foodies</span>
+                <h1 class="hero-main-title wow fadeInUp" data-wow-delay="0.3s">
+                    Delicious Food,<br />
+                    Delivered <span>To Your Doorstep</span>
+                </h1>
+                <p class="hero-desc wow fadeInUp" data-wow-delay="0.4s">
+                    Experience the ultimate food platform connecting food lovers, top local restaurants, 
+                    and administrators in one powerful, unified system. Grab your favorite meal or scale your restaurant business today!
+                </p>
+                <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 wow fadeInUp" data-wow-delay="0.5s">
+                    <a href="@Url.Action("ItemList", "Item")" class="btn-cta-primary">
+                        <i class="fa fa-utensils"></i> Explore Menu
+                    </a>
+                    <a href="/Account/Login" class="btn-cta-secondary">
+                        <i class="fa fa-sign-in-alt"></i> Sign In
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 hero-image-container mt-5 mt-lg-0 wow zoomIn" data-wow-delay="0.3s">
+                <div class="glow-ring"></div>
+                <img class="floating-dish" src="@Url.Content("~/Content/img/hero.png")" alt="Delicious Food Plate" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Three Module Portals -->
+<div class="container-fluid py-5">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <span class="section-tag">Features & Modules</span>
+        <h2 class="section-title">Explore Our Portals</h2>
+    </div>
+    <div class="row g-4 justify-content-center">
+        <!-- User Portal Card -->
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="glass-portal-card card-user">
+                <div class="portal-badge badge-user">Ordering System</div>
+                <div class="portal-icon-box icon-user">
+                    <i class="fa fa-hamburger"></i>
+                </div>
+                <h3 class="portal-title">User Portal</h3>
+                <p class="portal-desc">
+                    Browse menu items, filter by your favorite food categories, and order delicious meals. Enjoy a seamless food explorer journey.
+                </p>
+                <ul class="portal-features">
+                    <li class="user-feat"><i class="fa fa-check-circle"></i> View and search food items</li>
+                    <li class="user-feat"><i class="fa fa-check-circle"></i> Filter by categories & status</li>
+                    <li class="user-feat"><i class="fa fa-check-circle"></i> Fast & responsive ordering</li>
+                </ul>
+                <a href="@Url.Action("ItemList", "Item")" class="portal-btn btn-user">
+                    Browse Menu <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Restaurant Portal Card -->
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+            <div class="glass-portal-card card-restaurant">
+                <div class="portal-badge badge-restaurant">Partner Services</div>
+                <div class="portal-icon-box icon-restaurant">
+                    <i class="fa fa-store"></i>
+                </div>
+                <h3 class="portal-title">Restro Portal</h3>
+                <p class="portal-desc">
+                    Partner with us to add, edit, and manage your kitchen services. Display your culinary catalog and attract hungry customers.
+                </p>
+                <ul class="portal-features">
+                    <li class="rest-feat"><i class="fa fa-check-circle"></i> Register restaurant details</li>
+                    <li class="rest-feat"><i class="fa fa-check-circle"></i> Add and update menu items</li>
+                    <li class="rest-feat"><i class="fa fa-check-circle"></i> Manage active dish statuses</li>
+                </ul>
+                <a href="/Account/Register?role=Restaurant" class="portal-btn btn-restaurant">
+                    Add Services <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Admin Portal Card -->
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+            <div class="glass-portal-card card-admin">
+                <div class="portal-badge badge-admin">Management Portal</div>
+                <div class="portal-icon-box icon-admin">
+                    <i class="fa fa-user-shield"></i>
+                </div>
+                <h3 class="portal-title">Admin Portal</h3>
+                <p class="portal-desc">
+                    Complete administrative oversight. Approve user registrations, manage system settings, and control the entire catalog.
+                </p>
+                <ul class="portal-features">
+                    <li class="admin-feat"><i class="fa fa-check-circle"></i> Full CRUD access on food items</li>
+                    <li class="admin-feat"><i class="fa fa-check-circle"></i> Moderate registered accounts</li>
+                    <li class="admin-feat"><i class="fa fa-check-circle"></i> System configuration control</li>
+                </ul>
+                <a href="/Account/Login" class="portal-btn btn-admin">
+                    Control Center <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats counter -->
+<div class="container-fluid py-5">
+    <div class="stats-section wow fadeInUp" data-wow-delay="0.2s">
+        <div class="row g-4">
+            <div class="col-md-3 col-6 text-center">
+                <div class="stats-card">
+                    <span class="stats-icon"><i class="fa fa-utensils"></i></span>
+                    <div class="stats-number" data-toggle="counter-up">150</div>
+                    <div class="stats-label">Menu Items</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+                <div class="stats-card">
+                    <span class="stats-icon"><i class="fa fa-users"></i></span>
+                    <div class="stats-number" data-toggle="counter-up">25</div>
+                    <div class="stats-label">Restaurants</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+                <div class="stats-card">
+                    <span class="stats-icon"><i class="fa fa-motorcycle"></i></span>
+                    <div class="stats-number" data-toggle="counter-up">50</div>
+                    <div class="stats-label">Active Riders</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+                <div class="stats-card">
+                    <span class="stats-icon"><i class="fa fa-star"></i></span>
+                    <div class="stats-number">4.9</div>
+                    <div class="stats-label">User Rating</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Banner Card Call To Action -->
+<div class="container-fluid pb-5">
+    <div class="banner-card wow zoomIn" data-wow-delay="0.2s">
+        <div class="row align-items-center">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h2>Ready to list your restaurant?</h2>
+                <p>Join the fastest growing food system in the city and boost your business to the next level!</p>
+            </div>
+            <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+                <a href="/Account/Register" class="btn-banner">
+                    Join As Partner <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

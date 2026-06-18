@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="~/Content/img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Content/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/Content/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/sidebar.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    @{ var action = ViewContext.RouteData.Values["Action"].ToString(); }
+    <!-- Top Bar -->
+    <header class="app-topbar">
+        <button class="topbar-toggle" id="sidebarToggle" title="Toggle sidebar">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a href="@Url.Action("Index", "Home")" class="topbar-brand">
+            <div class="topbar-brand-icon">
+                <i class="fa fa-utensils"></i>
+            </div>
+            <div>
+                <span class="topbar-brand-name">Foodies</span>
+                <span class="topbar-brand-sub">Restaurant System</span>
+            </div>
+        </a>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-actions">
+            <button class="topbar-action-btn" title="Notifications">
+                <i class="bi bi-bell"></i>
+                <span class="notif-badge"></span>
+            </button>
+            <button class="topbar-action-btn" title="Help">
+                <i class="bi bi-question-circle"></i>
+            </button>
+            <button class="topbar-action-btn" title="Settings">
+                <i class="bi bi-gear"></i>
+            </button>
+            <div class="topbar-avatar" title="Admin">A</div>
+        </div>
+    </header>
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-label">Main</div>
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="@Url.Action("Index", "Home")"
+                       class="sidebar-nav-item @(action == "Index" ? "active" : "")">
+                        <span class="nav-icon"><i class="bi bi-house-door"></i></span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="@Url.Action("ItemList", "Item")"
+                       class="sidebar-nav-item @(action == "ItemList" ? "active" : "")">
+                        <span class="nav-icon"><i class="bi bi-grid"></i></span>
+                        <span class="nav-text">Menu</span>
+                    </a>
+                </li>
+                <!--  <li>
+                      <a href="@Url.Action("SaveItem", "Item")"
+                         class="sidebar-nav-item @(action == "SaveItem" ? "active" : "")">
+                          <span class="nav-icon"><i class="bi bi-plus-square"></i></span>
+                          <span class="nav-text">Add Item</span>
+                      </a>
+                  </li>-->
+                <li>
+                    <a href="@Url.Action("About", "Home")"
+                       class="sidebar-nav-item @(action == "About" ? "active" : "")">
+                        <span class="nav-icon"><i class="bi bi-info-circle"></i></span>
+                        <span class="nav-text">About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Contact", "Home")"
+                       class="sidebar-nav-item @(action == "Contact" ? "active" : "")">
+                        <span class="nav-icon"><i class="bi bi-envelope"></i></span>
+                        <span class="nav-text">Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <!-- Main Content -->
+    <div class="app-shell">
+        <main class="app-content" id="appContent">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/lib/wow/wow.min.js"></script>
+    <script src="~/Content/lib/easing/easing.min.js"></script>
+    <script src="~/Content/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/Content/lib/counterup/counterup.min.js"></script>
+    <script src="~/Content/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/Content/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="~/Content/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="~/Content/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    <script>
+        var toggleBtn = document.getElementById('sidebarToggle');
+        var overlay = document.getElementById('sidebarOverlay');
+
+        function updateSidebarState() {
+            var isMobile = window.matchMedia('(max-width: 991px)').matches;
+            if (isMobile) {
+                document.body.classList.remove('sidebar-collapsed');
+            } else if (localStorage.getItem('sidebarCollapsed') === 'true') {
+                document.body.classList.add('sidebar-collapsed');
+            }
+        }
+
+        toggleBtn.addEventListener('click', function () {
+            var isMobile = window.matchMedia('(max-width: 991px)').matches;
+            if (isMobile) {
+                document.body.classList.toggle('sidebar-open');
+            } else {
+                document.body.classList.toggle('sidebar-collapsed');
+                localStorage.setItem('sidebarCollapsed',
+                    document.body.classList.contains('sidebar-collapsed'));
+            }
+        });
+
+        overlay.addEventListener('click', function () {
+            document.body.classList.remove('sidebar-open');
+        });
+
+        window.addEventListener('resize', updateSidebarState);
+        updateSidebarState();
+    </script>
+    @RenderSection("scripts", required: false)
+
+    <!-- ── Global Toast Container ── -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+        <div id="appToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body fw-semibold" id="appToastMsg"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // showToast("message")         → green success
+        // showToast("message", "error") → red error
+        function showToast(message, type) {
+            var toast = document.getElementById("appToast");
+            document.getElementById("appToastMsg").textContent = message;
+
+            // Reset classes
+            toast.classList.remove("bg-success", "bg-danger", "text-white");
+
+            if (type === "error") {
+                toast.classList.add("bg-danger", "text-white");
+            } else {
+                toast.classList.add("bg-success", "text-white");
+            }
+
+            var bsToast = bootstrap.Toast.getOrCreateInstance(toast, { delay: 3500 });
+            bsToast.show();
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,194 @@
+﻿@model ItemListModel.ViewModel.ItemViewModel
+
+<div class="modal fade "
+     id="itemModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    @(Model.ItemId > 0 ? "Update Item" : "Add Item")
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                @using (Html.BeginForm("SaveItem", "Item", FormMethod.Post, new { id = "saveItem" }))
+                {
+
+                    @Html.HiddenFor(m => m.ItemId)
+                    @Html.HiddenFor(m => m.pageNumber)
+                    @Html.HiddenFor(m => m.pageSize)
+                    @Html.HiddenFor(m => m.SelectedCategoryId)
+                    @Html.HiddenFor(m => m.RestaurantName)
+                    @Html.HiddenFor(m => m.status)
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Item Name
+                        </label>
+
+                        @Html.TextBoxFor(
+                            m => m.ItemName,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter item name",
+                                required = Model.ItemId == 0 ? "required" : null
+                            })
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Description
+                        </label>
+
+                        @Html.TextAreaFor(
+                            m => m.description,
+                            new
+                            {
+                                @class = "form-control",
+                                placeholder = "Enter description"
+                            })
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Price
+                        </label>
+
+                        @Html.TextBoxFor(
+                            m => m.price,
+                            new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                required = Model.ItemId == 0 ? "required" : null
+                            })
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Restaurant Id
+                        </label>
+
+                        @Html.TextBoxFor(
+                            m => m.RestaurantId,
+                            new
+                            {
+                                @class = "form-control",
+                                type = "number",
+                                required = Model.ItemId == 0 ? "required" : null
+                            })
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Category
+                        </label>
+
+                        @Html.DropDownListFor(
+                            m => m.ItemCategoryId,
+                            new SelectList(
+                                Model.FoodCategory,
+                                "FoodCategoryId",
+                                "FoodCategoryName",
+                                Model.ItemCategoryId
+                            ),
+                            "-- Select Category --",
+                            new
+                            {
+                                @class = "form-control",
+                                required = Model.ItemId == 0 ? "required" : null
+                            })
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        @(Model.ItemId > 0 ? "Update Item" : "Save Item")
+
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    var modal = new bootstrap.Modal(
+        document.getElementById('itemModal'),
+        {
+            backdrop: 'static',
+            keyboard: false
+        });
+
+    modal.show();
+
+    $(document).on("submit", "#saveItem", function (e) {
+        e.preventDefault();
+        var $btn = $(this).find("button[type=submit]");
+        $btn.prop("disabled", true).text("Saving...");
+
+        $.ajax({
+            url: $(this).attr("action"),
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (res) {
+                if (res.success) {
+                    // ── Happy path: close modal, refresh table, green toast ──
+                    modal.hide();
+                    loadData(currentPage);
+                    showToast("Item saved successfully!");
+                } else {
+                    // ── BusinessException: close modal, red toast, stay on page ──
+                    modal.hide();
+                    showToast(res.message || "Validation error. Please check your input.", "error");
+                }
+            },
+            error: function () {
+                // ── Unexpected server error ──
+                modal.hide();
+                showToast("Something went wrong. Please try again.", "error");
+            },
+            complete: function () {
+                $btn.prop("disabled", false).text(
+                    $btn.data("original-text") || "Save Item"
+                );
+            }
+        });
+    });
+</script>
+

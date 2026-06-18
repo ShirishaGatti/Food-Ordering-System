@@ -1,0 +1,253 @@
+﻿@using ItemListModel.ViewModel
+@using ItemListModel.Model
+
+@model ItemViewModel
+    @{ 
+<!-- Pagination Logic -->
+            int pageGroupSize = 5;
+            int group = (Model.pageNumber - 1) / pageGroupSize;
+            int startPage = group * pageGroupSize + 1;
+            int endPage = Math.Min(startPage + pageGroupSize - 1, Model.ItemTotalPages);
+            int startRecord = (Model.pageNumber - 1) * Model.pageSize + 1;
+            int endRecord = Math.Min(Model.pageNumber * Model.pageSize, Model.ItemTotalCount);
+
+        }
+@functions {
+    public string Arrow(string field)
+    {
+
+        if (Model.SortField != field)
+            return "<span class='sort-both'>⇅</span>";
+
+        return Model.SortDirection == "ASC"
+            ? "<span class='sort-active'>▲</span>"
+            : "<span class='sort-active'>▼</span>";
+    }
+}
+<!-- Bootstrap Pagination -->
+<div class="row">
+    <div class="col-md-6">
+        <p class="text-muted" style="padding-top: 8px;">
+            Showing <strong>@startRecord</strong> to <strong>@endRecord</strong>
+            of <strong>@Model.ItemTotalCount</strong> items
+        </p>
+    </div>
+    </div>
+<input type="hidden"
+       id="totalPages"
+       value="@Model.ItemTotalPages" />
+
+    @if (Model.Items != null && Model.Items.Any())
+    {
+        <div class="table-responsive item-table-wrapper d-none d-md-block">
+            <table class="table table-striped align-middle">
+                <thead class="custom-table-head">
+                    <tr>
+                       <!-- <th class="sortable"
+                            data-field="ItemId">#</th>
+                        <th class="sortable"
+                            data-field="ItemName">
+                            Item Name
+                        </th>
+                        <th class="sortable"
+                            data-field="Price">
+                            Price
+                        </th>-->
+                        
+                        <th class="sortable" data-field="ItemId">
+                            Item ID @Html.Raw(Arrow("ItemId"))
+                        </th>
+                        <th class="sortable" data-field="ItemName">
+                            Item Name @Html.Raw(Arrow("ItemName"))
+                        </th>
+                        <th class="sortable" data-field="Price">
+                            Price @Html.Raw(Arrow("Price"))
+                        </th>
+
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th class="sortable"
+                            data-field="RestaurantName">
+                            Restaurant @Html.Raw(Arrow("RestaurantName"))
+                        </th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model.Items)
+                {
+                        <tr>
+                            <td>@item.ItemId</td>
+                            <td class="fw-bold">
+                                @item.ItemName
+                            </td>
+                            <td class="text-success fw-bold">
+                                ₹@item.price.ToString("0.00")
+                            </td>
+                            <td>
+                                @item.description
+                            </td>
+                            <td>
+                                <span class="badge bg-primary">
+                                    @item.FoodCategoryId.FoodCategoryName
+                                </span>
+                            </td>
+                            <td>
+                                @item.RestaurantId.RestaurantName
+                            </td>
+                            <td class="text-end">
+                                <a href="javascript:void(0)"
+                                   class="btn btn-sm btn-primary action-btn edit-btn"
+                                   data-id="@item.ItemId"
+                                   data-name="@item.ItemName"
+                                   data-price="@item.price"
+                                   data-desc="@item.description"
+                                   data-categoryid="@item.FoodCategoryId.FoodCategoryId"
+                                   data-category="@item.FoodCategoryId.FoodCategoryName"
+                                   data-restaurantid="@item.RestaurantId.RestaurantId"
+                                   data-restaurant="@item.RestaurantId.RestaurantName"
+                                   title="Edit">
+                                    <i class="bi bi-pencil-square text-white"></i>
+                                </a>
+                                <a href="javascript:void(0)"
+                                   class="btn btn-sm btn-danger action-btn delete-btn"
+                                   data-id="@item.ItemId"
+                                   data-name="@item.ItemName"
+                                   title="Delete">
+                                    <i class="bi bi-trash text-white"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="item-card-wrapper d-block d-md-none">
+            @foreach (var item in Model.Items)
+            {
+                <div class="card mobile-item-card mb-3 shadow-sm">
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h5 class="card-title mb-1">@item.ItemName</h5>
+                                <p class="text-muted small mb-0">ID: @item.ItemId</p>
+                            </div>
+                            <span class="text-success fw-bold fs-6">₹@item.price.ToString("0.00")</span>
+                        </div>
+                        <p class="card-text text-muted mb-3">@item.description</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-primary">@item.FoodCategoryId.FoodCategoryName</span>
+                            <span class="badge bg-secondary">@item.RestaurantId.RestaurantName</span>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2 card-actions">
+                            <a href="javascript:void(0)"
+                               class="btn btn-sm btn-primary action-btn edit-btn"
+                               data-id="@item.ItemId"
+                               data-name="@item.ItemName"
+                               data-price="@item.price"
+                               data-desc="@item.description"
+                               data-categoryid="@item.FoodCategoryId.FoodCategoryId"
+                               data-category="@item.FoodCategoryId.FoodCategoryName"
+                               data-restaurantid="@item.RestaurantId.RestaurantId"
+                               data-restaurant="@item.RestaurantId.RestaurantName"
+                               title="Edit">
+                                <i class="bi bi-pencil-square text-white"></i>
+                            </a>
+                            <a href="javascript:void(0)"
+                               class="btn btn-sm btn-danger action-btn delete-btn"
+                               data-id="@item.ItemId"
+                               title="Delete">
+                                <i class="bi bi-trash text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row mt-4 align-items-center">
+          
+            <div class="col-md-6">
+                <ul class="pagination justify-content-end mb-0">
+                    @if (Model.pageNumber > 1)
+                {
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="#"
+                               onclick="loadData(@(Model.pageNumber - 1)); return false;">
+                                &laquo;
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+
+                            <span class="page-link">
+                                &laquo;
+                            </span>
+
+                        </li>
+                    }
+
+                    @for (int i = startPage; i <= endPage; i++)
+                {
+                    if (i == Model.pageNumber)
+                    {
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    @i
+                                </span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="#"
+                                   onclick="loadData(@i); return false;">
+                                    @i
+                                </a>
+                            </li>
+                        }
+                    }
+                    @if (Model.pageNumber < Model.ItemTotalPages)
+                {
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="#"
+                               onclick="loadData(@(Model.pageNumber + 1)); return false;">
+                                &raquo;
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                &raquo;
+                            </span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info shadow-sm">
+            <h5 class="mb-2">
+                No items found!
+            </h5>
+            <p class="mb-0">
+                Please try different filters
+                or reset your search.
+            </p>
+        </div>
+    }
+
+

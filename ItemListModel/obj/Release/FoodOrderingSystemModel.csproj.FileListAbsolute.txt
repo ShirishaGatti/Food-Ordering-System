@@ -1,0 +1,5 @@
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\bin\Release\ItemListModel.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\bin\Release\ItemListModel.pdb
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\obj\Release\FoodOrderingSystemModel.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\obj\Release\ItemListModel.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\obj\Release\ItemListModel.pdb

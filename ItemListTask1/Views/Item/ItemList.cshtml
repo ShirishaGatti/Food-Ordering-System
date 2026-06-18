@@ -1,0 +1,261 @@
+﻿@using ItemListModel.ViewModel
+@using ItemListModel.Model
+@model ItemViewModel
+
+@{
+    ViewData["Title"] = "Item Paging";
+}
+<div id="pageContent">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-overlay">
+
+            <div class="container text-center text-white">
+                <h1 class="hero-title">🍽️ Explore Delicious Food</h1>
+                <h6 class="hero-subtitle">
+                    Discover the best dishes from top restaurants
+                </h6>
+            </div>
+
+        </div>
+    </div>
+
+    @using (Html.BeginForm("ItemList", "Item", FormMethod.Post,
+            new { id = "itemListForm" }))
+    {
+    <!-- Filter Card -->
+        <div class="service-item p-4" style="margin-bottom:30px;">
+
+            <div class="row g-3 justify-content-center">
+
+                <!-- Restaurant -->
+                <div class="col-md-3">
+                    <div class="form-group">
+
+                        <label class="fw-medium mb-2">
+                            Restaurant
+                        </label>
+
+                        @Html.TextBoxFor(
+                        m => m.RestaurantName,
+                        new
+                        {
+                            @class = "form-control",
+                            id = "RestaurantName",
+                            maxlength = "50",
+                            placeholder = "Search restaurant..."
+                        })
+
+                    </div>
+                </div>
+
+                <!-- Page Size -->
+                <div class="col-md-3">
+                    <div class="form-group">
+
+                        <label class="fw-medium mb-2">
+                            Page Size
+                        </label>
+
+                        @Html.DropDownListFor(
+                        m => m.pageSize,
+                        new SelectList(new List<int>
+                        {
+                            1,2,3,5,10,20
+                        }),
+                        new
+                        {
+                            @class = "form-control",
+                            id = "pageSize"
+                        })
+
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div class="col-md-3">
+                    <div class="form-group">
+
+                        <label class="fw-medium mb-2">
+                            Category
+                        </label>
+
+                        @Html.ListBoxFor(
+                        m => m.SelectedCategoryIds,
+                        new MultiSelectList(
+                            Model.FoodCategory,
+                            "FoodCategoryId",
+                            "FoodCategoryName"
+                        ),
+                        new
+                        {
+                            @class = "form-control",
+                            id = "SelectedCategoryIds"
+                        })
+
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="col-md-3">
+                    <div class="form-group">
+
+                        <label class="fw-medium mb-2">
+                            Status
+                        </label>
+                        @Html.DropDownListFor(
+                m => m.status,
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "-- Select Status --", Value = "" },
+                    new SelectListItem { Text = "Is Active", Value = "1" },
+                    new SelectListItem { Text = "Inactive", Value = "0" },
+                    new SelectListItem { Text = "Both", Value = "10" }
+                },
+                new { @class = "form-control", id = "Status" }
+            )
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row g-2 mt-3 justify-content-end text-start">
+                <div class="col-auto">
+                    <button type="submit"
+                            id="submitBtn"
+                            class="btn btn-primary btn-sm custom-search-btn">
+                        Search
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button type="reset"
+                            id="resetBtn"
+                            class="btn btn-outline-secondary btn-sm custom-reset-btn">
+                        Reset
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button type="button"
+                            id="AddBtn"
+                            class="btn btn-outline-warning btn-sm custom-add-btn">
+                        ADD ITEM
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+    }
+
+    <!-- Loading -->
+    <div id="loadingOverlay"
+         style="display:none;"
+         class="text-center">
+
+        <div class="spinner-border text-warning"
+             style="width:2rem;height:2rem;"
+             role="status">
+
+            <span class="visually-hidden">
+                Loading...
+            </span>
+
+        </div>
+
+        <p class="mt-3 fw-semibold text-muted fs-6">
+            Fetching delicious items...
+        </p>
+
+    </div>
+
+    <!-- Table -->
+    <div id="tableContainer" class="mt-4"></div>
+</div>
+<div id="deleteContainer">
+    <div class="modal fade "
+         id="deleteitemModal"
+         tabindex="-1"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered ">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Are you sure you want to delete Item ?
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"></button>
+
+                </div>
+
+                <div class="modal-body">
+                    @Html.HiddenFor(m => m.ItemId)
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Item Name
+                            </label>
+
+                            @Html.TextBoxFor(
+                             m => m.ItemName,
+                             new
+                             {
+                                 @class = "form-control",
+                                 @readonly = "readonly"
+                             })
+
+
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary"
+                                id="confirm-delete-btn">
+
+                            Delete Item
+
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+
+                            Cancel
+                              
+                        </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <div id="modalContainer"></div>
+    <hr />
+  @section scripts {
+    <!-- Pass server-side values to JS -->
+    <script>
+        window.ItemListConfig = {
+            initialPage: @(Model.pageNumber > 0 ? Model.pageNumber : 1),
+            getItemsUrl: '@Url.Action("GetItems", "Item")',
+            saveItemUrl: '@Url.Action("SaveItem", "Item")',
+            deleteItemUrl: '/Item/DeleteItem'
+        };
+    </script>
+
+    <script src="~/Content/js/itemList.js"></script>
+}

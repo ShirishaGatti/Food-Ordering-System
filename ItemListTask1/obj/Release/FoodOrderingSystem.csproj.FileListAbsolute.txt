@@ -1,0 +1,1 @@
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\obj\Release\FoodOrderingSystem.csprojResolveAssemblyReference.cache
