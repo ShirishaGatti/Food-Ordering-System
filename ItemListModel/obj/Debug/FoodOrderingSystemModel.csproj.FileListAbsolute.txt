@@ -7,3 +7,4 @@ C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\bin\Debug\ItemListModel.pdb
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\obj\Debug\ItemListModel.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\obj\Debug\ItemListModel.pdb
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListModel\obj\Debug\FoodOrderingSystemModel.csprojResolveAssemblyReference.cache

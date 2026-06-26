@@ -75,6 +75,13 @@
                         <span class="nav-text">Menu</span>
                     </a>
                 </li>
+                <li>
+                    <a href="@Url.Action("OrderList", "Order")"
+                       class="sidebar-nav-item @(action == "OrderList" ? "active" : "")">
+                        <span class="nav-icon"><i class="bi bi-grid"></i></span>
+                        <span class="nav-text">Order</span>
+                    </a>
+                </li>
                 <!--  <li>
                       <a href="@Url.Action("SaveItem", "Item")"
                          class="sidebar-nav-item @(action == "SaveItem" ? "active" : "")">

@@ -45,10 +45,16 @@
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\FoodCategory.cs" />
     <Compile Include="Model\ItemName.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\Restaurant.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\EditOrderViewModel.cs" />
     <Compile Include="ViewModel\FilterState.cs" />
     <Compile Include="ViewModel\ItemViewModel.cs" />
+    <Compile Include="ViewModel\OrderItemViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

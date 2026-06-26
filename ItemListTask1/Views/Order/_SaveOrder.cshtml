@@ -1,0 +1,136 @@
+﻿@model ItemListModel.ViewModel.OrderViewModel
+@{
+    if (Model.Items == null)
+    {
+        Model.Items = new List<ItemListModel.ViewModel.OrderItemViewModel>();
+    }
+
+    if (Model.OrderId == 0 && !Model.Items.Any())
+    {
+        Model.Items.Add(new ItemListModel.ViewModel.OrderItemViewModel
+        {
+            Quantity = 1
+        });
+    }
+}
+<div class="modal fade" id="orderModal" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">
+                    @(Model.OrderId > 0
+        ? "✏️ Edit Order #" + Model.OrderId
+        : "➕ Create New Order")
+                </h5>
+                <button type="button" class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                @* Hidden fields — bind to model *@
+                <input type="hidden" id="hOrderId" value="@Model.OrderId" />
+                <input type="hidden" id="hUserId" value="@Model.UserId" />
+
+                <div class="mb-3 row align-items-center">
+                    <label class="col-sm-3 col-form-label fw-semibold">Order Date</label>
+                    <div class="col-sm-9">
+
+                    @if (Model.OrderId > 0)
+                    {
+                        <input type="text"
+                               id="hOrderDate"
+                               class="form-control"
+                               readonly
+                               value="@(Model.OrderDate.HasValue ? Model.OrderDate.Value.ToString("dd-MMM-yyyy") : "")" />
+                    }
+                    else
+                    {
+                        <input type="date"
+                               id="hOrderDate"
+                               class="form-control"
+                               value="@(DateTime.Now.ToString("yyyy-MM-dd"))" />
+                    }
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-sm" id="itemsTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Item</th>
+                            <th style="width:110px">Qty</th>
+                            <th style="width:120px">Price (₹)</th>
+                            <th style="width:48px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Items.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <select class="form-select item-dropdown">
+                                        @foreach (var a in Model.AllItems)
+                                        {
+                                            <option value="@a.ItemId"
+                                                    data-price="@a.Price"
+                                                    @(a.ItemId == Model.Items[i].ItemId ? "selected" : "")>
+                                                @a.ItemName
+                                            </option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control qty-box"
+                                           min="1" value="@Model.Items[i].Quantity" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control price-box"
+                                           readonly value="@Model.Items[i].Price" />
+                                </td>
+                                <td class="text-center">
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-danger remove-row-btn">
+                                        ✕
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <button type="button" id="addItemRowBtn"
+                        class="btn btn-outline-secondary btn-sm">
+                    + Add Item
+                </button>
+
+                <div class="mt-3 text-end fw-bold fs-6">
+                    Total: ₹<span id="orderTotal">0.00</span>
+                </div>
+
+                @* Pass AllItems as JSON for JS *@
+                <script id="allItemsJson" type="application/json">
+                    @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
+                        Model.AllItems.Select(x => new { x.ItemId, x.ItemName, x.Price })
+                    ))
+                </script>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button"
+                        class="btn @(Model.OrderId > 0 ? "btn-warning" : "btn-primary")"
+                        id="saveOrderBtn">
+
+                    @(Model.OrderId > 0 ? "💾 Update Order" : "Save Order")
+
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

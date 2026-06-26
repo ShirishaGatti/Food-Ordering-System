@@ -53,9 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dal\IOrderRepository.cs" />
+    <Compile Include="dal\OrderRepository.cs" />
     <Compile Include="dal\ItemRepository.cs" />
     <Compile Include="dal\IItemRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="service\ItemService.cs" />
+    <Compile Include="service\OrderService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

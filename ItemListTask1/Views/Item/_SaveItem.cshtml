@@ -3,13 +3,15 @@
 <div class="modal fade "
      id="itemModal"
      tabindex="-1"
-     aria-hidden="true">
+     aria-hidden="true"
+     role="dialog">
 
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-
+    @*<div class="modal-dialog modal-dialog-centered modal-lg">*@
+        @*<div class="modal fade" id="orderModal" tabindex="-1" aria-modal="true" role="dialog">*@
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
 
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
 
                 <h5 class="modal-title">
                     @(Model.ItemId > 0 ? "Update Item" : "Add Item")
@@ -49,13 +51,13 @@
 
                     </div>
 
-                    <div class="mb-3">
+                            <div class="mb-3">
 
-                        <label class="form-label">
-                            Description
-                        </label>
+                                <label class="form-label">
+                                    Description
+                                </label>
 
-                        @Html.TextAreaFor(
+                                @Html.TextAreaFor(
                             m => m.description,
                             new
                             {
@@ -63,15 +65,15 @@
                                 placeholder = "Enter description"
                             })
 
-                    </div>
+                            </div>
 
-                    <div class="mb-3">
+                            <div class="mb-3">
 
-                        <label class="form-label">
-                            Price
-                        </label>
+                                <label class="form-label">
+                                    Price
+                                </label>
 
-                        @Html.TextBoxFor(
+                                @Html.TextBoxFor(
                             m => m.price,
                             new
                             {
@@ -80,15 +82,15 @@
                                 required = Model.ItemId == 0 ? "required" : null
                             })
 
-                    </div>
+                            </div>
 
-                    <div class="mb-3">
+                            <div class="mb-3">
 
-                        <label class="form-label">
-                            Restaurant Id
-                        </label>
+                                <label class="form-label">
+                                    Restaurant Id
+                                </label>
 
-                        @Html.TextBoxFor(
+                                @Html.TextBoxFor(
                             m => m.RestaurantId,
                             new
                             {
@@ -97,15 +99,15 @@
                                 required = Model.ItemId == 0 ? "required" : null
                             })
 
-                    </div>
+                            </div>
 
-                    <div class="mb-3">
+                            <div class="mb-3">
 
-                        <label class="form-label">
-                            Category
-                        </label>
+                                <label class="form-label">
+                                    Category
+                                </label>
 
-                        @Html.DropDownListFor(
+                                @Html.DropDownListFor(
                             m => m.ItemCategoryId,
                             new SelectList(
                                 Model.FoodCategory,
@@ -120,22 +122,22 @@
                                 required = Model.ItemId == 0 ? "required" : null
                             })
 
-                    </div>
+                            </div>
 
-                    <button type="submit"
-                            class="btn btn-primary">
+                            <button type="submit"
+                                    class="btn btn-primary">
 
-                        @(Model.ItemId > 0 ? "Update Item" : "Save Item")
+                                @(Model.ItemId > 0 ? "Update Item" : "Save Item")
 
-                    </button>
+                            </button>
 
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal">
+                            <button type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal">
 
-                        Cancel
+                                Cancel
 
-                    </button>
+                            </button>
                 }
 
             </div>
@@ -144,51 +146,53 @@
 
     </div>
 
-</div>
 
-<script>
 
-    var modal = new bootstrap.Modal(
-        document.getElementById('itemModal'),
-        {
-            backdrop: 'static',
-            keyboard: false
-        });
+        </div>
 
-    modal.show();
+        <script>
 
-    $(document).on("submit", "#saveItem", function (e) {
-        e.preventDefault();
-        var $btn = $(this).find("button[type=submit]");
-        $btn.prop("disabled", true).text("Saving...");
+            var modal = new bootstrap.Modal(
+                document.getElementById('itemModal'),
+                {
+                    backdrop: 'static',
+                    keyboard: false
+                });
 
-        $.ajax({
-            url: $(this).attr("action"),
-            type: "POST",
-            data: $(this).serialize(),
-            success: function (res) {
-                if (res.success) {
-                    // ── Happy path: close modal, refresh table, green toast ──
-                    modal.hide();
-                    loadData(currentPage);
-                    showToast("Item saved successfully!");
-                } else {
-                    // ── BusinessException: close modal, red toast, stay on page ──
-                    modal.hide();
-                    showToast(res.message || "Validation error. Please check your input.", "error");
-                }
-            },
-            error: function () {
-                // ── Unexpected server error ──
-                modal.hide();
-                showToast("Something went wrong. Please try again.", "error");
-            },
-            complete: function () {
-                $btn.prop("disabled", false).text(
-                    $btn.data("original-text") || "Save Item"
-                );
-            }
-        });
-    });
-</script>
+            modal.show();
+
+            $(document).on("submit", "#saveItem", function (e) {
+                e.preventDefault();
+                var $btn = $(this).find("button[type=submit]");
+                $btn.prop("disabled", true).text("Saving...");
+
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (res) {
+                        if (res.success) {
+                            // ── Happy path: close modal, refresh table, green toast ──
+                            modal.hide();
+                            loadData(currentPage);
+                            showToast("Item saved successfully!");
+                        } else {
+                            // ── BusinessException: close modal, red toast, stay on page ──
+                            modal.hide();
+                            showToast(res.message || "Validation error. Please check your input.", "error");
+                        }
+                    },
+                    error: function () {
+                        // ── Unexpected server error ──
+                        modal.hide();
+                        showToast("Something went wrong. Please try again.", "error");
+                    },
+                    complete: function () {
+                        $btn.prop("disabled", false).text(
+                            $btn.data("original-text") || "Save Item"
+                        );
+                    }
+                });
+            });
+        </script>
 
