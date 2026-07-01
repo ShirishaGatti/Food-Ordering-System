@@ -75,6 +75,7 @@ C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemL
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListTask1\obj\Debug\ItemListTask1.dll
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListTask1\obj\Debug\ItemListTask1.pdb
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\obj\Debug\FoodOrderingSystem.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\roslyn\csc.exe
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -108,6 +109,10 @@ C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.ObjectBuilder2.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Newtonsoft.Json.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Owin.dll
@@ -119,6 +124,7 @@ C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\System.Web.WebPages.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\System.Web.WebPages.Razor.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\WebGrease.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\BCrypt.Net-Next.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\ItemListDal.pdb
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\ItemListModel.pdb
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
@@ -145,10 +151,6 @@ C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\obj\Debug\FoodOrderingSystem.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\BCrypt.Net-Next.xml
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\obj\Debug\ItemListTask1.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\obj\Debug\ItemListTask1.pdb
-C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
-C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.ObjectBuilder2.dll
-C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
-C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListTask1\bin\Microsoft.Practices.EnterpriseLibrary.Data.SqlCe.dll

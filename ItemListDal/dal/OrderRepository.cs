@@ -131,13 +131,24 @@ namespace ItemListDal.dal
         }
 
         // ── Order list (main page) ────────────────────────────────────────
-        public List<OrderViewModel> GetOrderList()
+        public OrderViewModel GetOrderList(OrderViewModel orderViewModel)
         {
             try
             {
                 List<OrderViewModel> orderList = new List<OrderViewModel>();
 
                 DbCommand cmd = _db.GetStoredProcCommand("GetOrderList");
+                _db.AddInParameter(cmd, "@Status", DbType.Int32, orderViewModel.Status);
+                _db.AddInParameter(cmd, "@PriceRange", DbType.String,
+                    string.IsNullOrEmpty(orderViewModel.PriceRange) ? (object)DBNull.Value : orderViewModel.PriceRange);
+                _db.AddInParameter(cmd, "@Price", DbType.Decimal,
+                    orderViewModel.Price.HasValue ? (object)orderViewModel.Price.Value : DBNull.Value);
+                _db.AddInParameter(cmd, "@DateFrom", DbType.DateTime,
+                    orderViewModel.DateFrom.HasValue ? (object)orderViewModel.DateFrom.Value : DBNull.Value);
+                _db.AddInParameter(cmd, "@DateTo", DbType.DateTime,
+                    orderViewModel.DateTo.HasValue ? (object)orderViewModel.DateTo.Value : DBNull.Value);
+                _db.AddInParameter(cmd, "@PageNumber", DbType.Int32, orderViewModel.pageNumber);
+                _db.AddInParameter(cmd, "@PageSize", DbType.Int32, orderViewModel.pageSize);
                 DataSet ds = _db.ExecuteDataSet(cmd);
 
                 if (ds.Tables.Count > 0)
@@ -156,7 +167,10 @@ namespace ItemListDal.dal
                             {
                                 OrderId = orderId,
                                 UserId = row["UserId"] != DBNull.Value ? Convert.ToInt32(row["UserId"]) : 0,
+                                IsActive = row["IsActive"] != DBNull.Value ? Convert.ToBoolean(row["IsActive"]) : false,
                                 OrderDate = row["OrderDate"] != DBNull.Value ? Convert.ToDateTime(row["OrderDate"]) : (DateTime?)null
+                               
+
                             };
                             orderList.Add(existing);
                         }
@@ -167,11 +181,21 @@ namespace ItemListDal.dal
                             ItemName = row["ItemName"] != DBNull.Value ? row["ItemName"].ToString() : "",
                             Price = row["Price"] != DBNull.Value ? Convert.ToDecimal(row["Price"]) : 0,
                             Quantity = row["Quantity"] != DBNull.Value ? Convert.ToInt32(row["Quantity"]) : 0
-                        });
-                    }
-                }
 
-                return orderList;
+                        });
+                        orderViewModel.ItemTotalCount = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalCount"]);
+                    }
+                   
+                }
+                orderViewModel.Orders = orderList;
+
+                orderViewModel.ItemTotalPages =
+                    (int)Math.Ceiling(
+                        (double)orderViewModel.ItemTotalCount /
+                        orderViewModel.pageSize
+                    );
+
+                return orderViewModel;
             }
             catch (SqlException ex)
             {

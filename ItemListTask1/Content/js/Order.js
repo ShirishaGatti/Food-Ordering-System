@@ -179,3 +179,71 @@ $(document).on("click", "#confirmDeleteOrderBtn", function () {
     });
 
 });
+
+//$(document).on("change", "input[name='status']", function () {
+
+//    var status = $(this).val();
+
+//    window.location.href =
+//        "/Order/OrderList?status=" + status;
+
+//});
+// Apply button click
+
+let currentPage = 1;
+function filterOrders(pageNumber) {
+    currentPage = pageNumber || 1;
+    var data = {
+        pageNumber: pageNumber,
+        pageSize: $("#pageSize").val(),
+        Status: $("#statusFilter").val(),
+        PriceRange: $("#PriceRange").val() || null,
+        Price: $("#Price").val() || null,        
+        DateFrom: $("#DateFrom").val() || null,  
+        DateTo: $("#DateTo").val() || null
+    };
+    console.log(data)
+    $("#loadingOverlay").show();
+    $("#orderCardsContainer").hide();
+    
+    $.ajax({
+
+        url: "/Order/OrderList",
+        type: "GET",
+        data: data,
+        headers: { "X-Requested-With": "XMLHttpRequest" },
+        beforeSend: function () {
+            console.log("Sending request...");
+        },
+        success: function (response) {           
+            $("#orderCardsContainer").html(response);
+           
+        },
+        error: function () {
+         
+            alert("Failed to load orders.");
+        },
+        complete: function () {
+            $("#loadingOverlay").hide();
+            $("#orderCardsContainer").show();
+        }
+
+    });
+}
+
+$(document).on("click", "#applyOrderFilters", function () {
+   
+    filterOrders(1);
+
+});
+
+$(document).on("click", "#resetOrderFilters", function () {
+    var date = new Date();
+    date.setMonth(date.getMonth() - 1);
+
+    $("#DateFrom").val(date.toISOString().split('T')[0]);
+    $("#DateTo").val(new Date().toISOString().split('T')[0]);
+    $("#PriceRange").val(">=");
+    $("#Price").val(0);
+    $("#statusFilter").val(10);
+});

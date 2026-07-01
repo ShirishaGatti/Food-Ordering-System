@@ -11,8 +11,16 @@ C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemL
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListDal\obj\Debug\ItemListDal.pdb
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\ItemListDal.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\ItemListDal.pdb
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\BCrypt.Net-Next.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\ItemListModel.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\System.Buffers.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\System.Memory.dll
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\ItemListModel.pdb
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\System.Buffers.xml
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\System.Memory.xml
+C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\obj\Debug\FoodOrderingSystemDal.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\obj\Debug\ItemListDal.dll
 C:\Users\Administrator\Documents\Visual Studio 2017\ItemListTask1\ItemListDal\obj\Debug\ItemListDal.pdb

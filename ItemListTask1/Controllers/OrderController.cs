@@ -2,80 +2,123 @@
 //using ItemListModel.ViewModel;
 //using System;
 //using System.Collections.Generic;
-//using System.Linq;
-//using System.Web;
 //using System.Web.Mvc;
 
 //namespace ItemListTask1.Controllers
 //{
 //    public class OrderController : Controller
 //    {
-//        public ActionResult OrderList()
+//        private readonly OrderRepository _repo = new OrderRepository();       
+//        public ActionResult OrderList(OrderViewModel orderViewModel)
 //        {
-//            OrderRepository dal = new OrderRepository();
+//            try
+//            {
+//                var orders = _repo.GetOrderList(orderViewModel);
 
-//            List<OrderViewModel> model = dal.GetOrderList();
+//                if (Request.IsAjaxRequest())
+//                    return PartialView("_OrderCardsContainer", orders);
 
-//            return View(model);
+//                var vm = new OrderViewModel
+//                {
+//                    Orders = orders,
+//                    Status = orderViewModel.Status,
+//                    PriceRange = orderViewModel.PriceRange,
+//                    Price = orderViewModel.Price,
+//                    DateFrom = orderViewModel.DateFrom,
+//                    DateTo = orderViewModel.DateTo
+//                };
+//                return View(vm);
+//            }
+//            catch (Exception ex)
+//            {
+//                return Content("REAL ERROR: " + ex.Message + " | INNER: " + ex.InnerException?.Message);
+//            }
+//        }
+//        // ── GET: Load edit modal (mirrors SaveItem GET) ───────────────────
+//        [HttpGet]
+//        public ActionResult SaveOrder(int? id)
+//        {
+//            OrderViewModel vm = id.HasValue
+//                ? _repo.LoadOrder(id.Value)
+//                : new OrderViewModel { AllItems = _repo.GetAllItems() };
+
+//            return PartialView("_SaveOrder", vm);
+//        }
+
+//        // ── POST: Save (mirrors SaveItem POST) ────────────────────────────
+//        [HttpPost]
+//        public ActionResult SaveOrder(OrderViewModel model)
+//        {
+//            _repo.SaveOrder(model);
+//            return Json(new { success = true });
+//        }
+
+//        // ── Get item price for dropdown change ────────────────────────────
+//        public JsonResult GetItemPrice(int itemId)
+//        {
+//            decimal price = _repo.GetAllItems()
+//                .Find(x => x.ItemId == itemId)?.Price ?? 0;
+
+//            return Json(price, JsonRequestBehavior.AllowGet);
+//        }
+
+//        [HttpPost]
+//        public ActionResult DeleteOrder(int orderId)
+//        {
+//            _repo.OrderDelete(orderId);
+
+//            return Json(new
+//            {
+//                success = true
+//            });
 //        }
 //    }
-////}
+//}
 
-using ItemListDal.dal;
+// FILE: ItemListTask1\Controllers\OrderController.cs
+
+using ItemListDal.Services;
 using ItemListModel.ViewModel;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ItemListTask1.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly OrderRepository _repo = new OrderRepository();
+        private readonly OrderService _service = new OrderService();
 
-        // ── Main list page ────────────────────────────────────────────────
-        public ActionResult OrderList()
+        public ActionResult OrderList(OrderViewModel orderViewModel)
         {
-            List<OrderViewModel> model = _repo.GetOrderList();
-            return View(model);
+            var vm = _service.GetOrderList(orderViewModel);
+
+            if (Request.IsAjaxRequest())
+                return PartialView("_OrderCardsContainer", vm);
+
+            return View(vm);
         }
 
-        // ── GET: Load edit modal (mirrors SaveItem GET) ───────────────────
         [HttpGet]
         public ActionResult SaveOrder(int? id)
         {
             OrderViewModel vm = id.HasValue
-                ? _repo.LoadOrder(id.Value)
-                : new OrderViewModel { AllItems = _repo.GetAllItems() };
+                ? _service.LoadOrder(id.Value)
+                : new OrderViewModel { AllItems = _service.GetAllItems() };
 
             return PartialView("_SaveOrder", vm);
         }
 
-        // ── POST: Save (mirrors SaveItem POST) ────────────────────────────
         [HttpPost]
         public ActionResult SaveOrder(OrderViewModel model)
         {
-            _repo.SaveOrder(model);
+            _service.SaveOrder(model);
             return Json(new { success = true });
-        }
-
-        // ── Get item price for dropdown change ────────────────────────────
-        public JsonResult GetItemPrice(int itemId)
-        {
-            decimal price = _repo.GetAllItems()
-                .Find(x => x.ItemId == itemId)?.Price ?? 0;
-
-            return Json(price, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult DeleteOrder(int orderId)
         {
-            _repo.OrderDelete(orderId);
-
-            return Json(new
-            {
-                success = true
-            });
+            _service.DeleteOrder(orderId);
+            return Json(new { success = true });
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ItemListDal.dal
 {
     interface IOrderRepository
     {
-        List<OrderViewModel> GetOrderList();
+        OrderViewModel GetOrderList(OrderViewModel orderViewModel);
     //    bool Load();
    //     bool Save();
         bool SaveOrder(OrderViewModel orderViewModel);

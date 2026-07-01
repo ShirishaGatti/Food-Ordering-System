@@ -7,6 +7,19 @@
 .ff-secondary {
     font-family: 'Pacifico', cursive;
 }
+
+.order-table {
+    table-layout: fixed;
+    width: 100%;
+}
+.order-table{
+    table-layout: fixed;
+    width:100%;
+}
+.item-name {
+    white-space: normal;
+    word-break: break-word;
+}
 .select2-overflow-badge {
     display: inline-flex;
     align-items: center;
