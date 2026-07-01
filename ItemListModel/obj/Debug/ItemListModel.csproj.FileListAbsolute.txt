@@ -1,5 +1,0 @@
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListModel\bin\Debug\ItemListModel.dll
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListModel\bin\Debug\ItemListModel.pdb
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListModel\obj\Debug\ItemListModel.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListModel\obj\Debug\ItemListModel.dll
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\ItemListTask1\ItemListModel\obj\Debug\ItemListModel.pdb
